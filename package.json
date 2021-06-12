@@ -1,8 +1,8 @@
 {
-  "name": "danieltibi_website",
+  "name": "elenatibi_website",
   "repository": {
     "type": "git",
-    "url": "https://danieltibi.git.beanstalkapp.com/danieltibi.git"
+    "url": ""
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
@@ -38,7 +38,7 @@
     "copy:assets:images": "cp -R src/images public/assets",
     "copy:assets": "npm-run-all --parallel copy:assets:*",
     "build": "npm-run-all --sequential clean:assets copy:assets --parallel build:css build:js",
-    "open:dev": "opener http://danieltibi.test",
+    "open:dev": "opener http://elenatibi.test",
     "watch:css": "onchange 'src/css/**/*' -- npm run build:css",
     "watch:js": "onchange 'src/js/**/*' -- npm run build:js",
     "watch:fonts": "onchange 'src/fonts/**/*' -- npm-run-all --sequential clean:assets:fonts copy:assets:fonts",
