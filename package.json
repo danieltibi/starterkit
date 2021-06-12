@@ -1,0 +1,54 @@
+{
+  "name": "danieltibi_website",
+  "repository": {
+    "type": "git",
+    "url": "https://danieltibi.git.beanstalkapp.com/danieltibi.git"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "browserify": "^16.5.0",
+    "clean-css": "^4.2.3",
+    "clean-css-cli": "^4.3.0",
+    "css-combine": "^0.1.7",
+    "jshint": "^2.11.0",
+    "live-reload": "latest",
+    "npm-run-all": "latest",
+    "onchange": "^6.1.0",
+    "opener": "latest",
+    "postcss": "latest",
+    "rimraf": "^3.0.2",
+    "uglify-js": "^3.7.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild:css": "mkdir -p public/assets/css/",
+    "build:css": "css-combine src/css/main.css > public/assets/css/main.css",
+    "postbuild:css:autoprefixer": "postcss --use autoprefixer -r public/assets/css/main.css ",
+    "postbuild:css:cssmin": "cleancss --skip-rebase public/assets/css/main.css > public/assets/css/main.min.css",
+    "postbuild:css": "npm-run-all --sequential postbuild:css:autoprefixer postbuild:css:cssmin",
+    "prebuild:js": "jshint src/js/main.js && mkdir -p public/assets/js",
+    "build:js": "browserify src/js/main.js > public/assets/js/main.min.js",
+    "postbuild:js": "uglifyjs public/assets/js/main.min.js",
+    "clean:assets:css": "rimraf build/assets/css/*",
+    "clean:assets:js": "rimraf build/assets/js/*",
+    "clean:assets:fonts": "rimraf build/assets/fonts/*",
+    "clean:assets:images": "rimraf build/assets/images/*",
+    "clean:assets": "npm-run-all --parallel clean:assets:*",
+    "copy:assets:fonts": "cp -R src/fonts public/assets",
+    "copy:assets:images": "cp -R src/images public/assets",
+    "copy:assets": "npm-run-all --parallel copy:assets:*",
+    "build": "npm-run-all --sequential clean:assets copy:assets --parallel build:css build:js",
+    "open:dev": "opener http://danieltibi.test",
+    "watch:css": "onchange 'src/css/**/*' -- npm run build:css",
+    "watch:js": "onchange 'src/js/**/*' -- npm run build:js",
+    "watch:fonts": "onchange 'src/fonts/**/*' -- npm-run-all --sequential clean:assets:fonts copy:assets:fonts",
+    "watch:images": "onchange 'src/images/**/*' -- npm-run-all --sequential clean:assets:images copy:assets:images",
+    "watch": "npm-run-all --parallel watch:*",
+    "live-reload": "live-reload public/assets/ --port=9091",
+    "dev": "npm run open:dev -s & npm-run-all --parallel watch live-reload"
+  },
+  "license": {},
+  "dependencies": {
+    "postcss-cli": "^8.3.1"
+  }
+}
