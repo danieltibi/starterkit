@@ -4,22 +4,21 @@
 Icon
 .DS_Store
 
+# Local Preset Files
+# ------------
+elenatibi.code-workspace
+
 # Temporary files
 # ---------------
 
-/media/*
-!/media/index.html
+/public/media/*
+!/public/media/index.html
 
-# Lock files
+# Content files
 # ---------------
-.lock
 
-# Editors
-# ---------------
-*.sublime-project
-*.sublime-workspace
-/.vscode
-/.idea
+/content/*
+content/site.txt
 
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
@@ -46,3 +45,4 @@ Icon
 # License
 # ---------------
 /site/config/.license
+node_modules
